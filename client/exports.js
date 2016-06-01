@@ -1,3 +1,1 @@
-export { default as DropDown } from 'components/DropDown';
-export { default as Carousel } from 'components/Carousel';
-export { default as Email } from 'components/Email';
+export { default as ComponentRegistry } from 'app/ComponentRegistry';

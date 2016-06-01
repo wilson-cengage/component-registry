@@ -17,10 +17,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, './static/'),
     filename: '[name].js',
-    libraryTarget: 'umd',
-    jsonpFunction: `jsonpFunction${jsonpPackageName}`,   /* jsonp function must be unique within the entire cengage universe, so that webpack chunk loaders for each package don't collide */
-    chunkFilename: `${packageName}/${packageName}-[id].js`,
-    publicPath: '/components/'   /* for bundle chunk lookup during runtime, should eventually be CMP /components/component3-package1/ */
+    libraryTarget: 'umd'
   },
   externals: {
     'react': 'React',
@@ -44,7 +41,7 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
+        //exclude: /node_modules/,
         loaders: [
           // 'react-hot',
           'babel-loader'
@@ -71,7 +68,7 @@ module.exports = {
       minimize: true,
       debug: false
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    /*new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       },
@@ -79,16 +76,9 @@ module.exports = {
         comments: false
       },
       sourceMap: false
-    }),
+    }),*/
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      children: true,     /** deps shared by chunks are extracted into its own async chunk **/
-      async: true
-    }),
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 5        /** Too many chunks means too many async requests before component can be rendered */
     })
   ],
   devServer: {

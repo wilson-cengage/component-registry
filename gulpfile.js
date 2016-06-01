@@ -17,6 +17,11 @@ gulp.task('postbuild', function(packageName) {
     // place code for your default task here
 
     gulp.src([`static/${packageName}/**`]).pipe(gulp.dest(`dist`));
-    gulp.src([`static/${packageName}/**`]).pipe(gulp.dest(`components/${packageName}`));
 
+    // copy __adapters to components
+    gulp.src([`client/__adapters/**`]).pipe(gulp.dest(`components/__adapters`));
+
+    // copy component3-package1 to components (dev test)
+    gulp.src([`node_modules/component3-package1/dist/**`])
+        .pipe(gulp.dest(`components/component3-package1/`));
 });
